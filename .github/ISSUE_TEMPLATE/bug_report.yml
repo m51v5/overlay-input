@@ -1,0 +1,54 @@
+name: Bug report
+description: Something doesn't work as it should
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Overlay Input version
+      description: Shown on the About page.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+  - type: dropdown
+    id: display
+    attributes:
+      label: Where does the overlay show?
+      options:
+        - On screen
+        - In a window (OBS)
+        - Hidden
+    validations:
+      required: true
+  - type: input
+    id: game
+    attributes:
+      label: Game or app, if it matters
+      description: Include its display mode (exclusive fullscreen, borderless or windowed), and whether it runs as administrator.
+      placeholder: Some Game, borderless, not admin
+  - type: textarea
+    id: profile
+    attributes:
+      label: Profile
+      description: The `.toml` file from `profiles/`, if the bug depends on it.
+      render: toml
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Lines from today's file in `logs/` next to the exe.
+      render: text

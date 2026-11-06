@@ -1,0 +1,12 @@
+# Controller in the bottom-right corner. style = "xbox" | "dualsense".
+# source = "auto" (first pad that sends input) | "xinput" (+ index = 0..3) | "dualsense"
+name = "Gamepad"
+anchor = "bottom-right"
+offset = [20, 20]
+opacity = 0.6
+
+[layout]
+widget = "gamepad"
+style = "xbox"
+source = "auto"
+width = 500

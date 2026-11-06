@@ -1,0 +1,18 @@
+name: Feature request
+description: An idea for Overlay Input
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The situation or game where the app falls short today.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help?
+      description: How you imagine it working. A rough idea is fine.
+    validations:
+      required: true

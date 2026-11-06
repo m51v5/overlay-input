@@ -1,0 +1,5 @@
+# Text is LF in the repo; editors and checkouts can use their own line endings.
+* text=auto
+
+*.png binary
+*.ico binary

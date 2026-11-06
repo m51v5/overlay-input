@@ -1,0 +1,43 @@
+# Overlay Input profile. Saved changes apply instantly.
+#
+# anchor  : top-left | top-right | bottom-left | bottom-right | center
+# offset  : [x, y] px from the anchor corner, inward
+# opacity : 0.0 (invisible) .. 1.0 (solid), outlines and labels
+# highlight_opacity : optional; pressed fills, glows, tints, the movement ring (default = opacity)
+# scale   : extra size multiplier on top of Windows display scaling
+# monitor : 0 = primary, then other monitors left to right
+# gap     : px between widgets
+#
+# layout is a tree: { row = [...] } places side by side, { column = [...] } stacks,
+# { widget = "..." } is a leaf. Rows/columns take align = "start" | "center" | "end".
+#
+# Widgets (options are optional):
+#   keyboard        preset = "default" | "full"
+#   mouse           scroll_highlight = true | false (wheel half lights in scroll direction),
+#                   scroll_color = [r, g, b] (default blue, distinct from click green)
+#   mouse-movement  radius, padding, elements, element_size = [w, h], fade_factor,
+#                   speed_factor, affected_neighbours, neighbour_fade_factor,
+#                   gradient = [{ at = 0.0, rgb = [r, g, b], opacity = 0.0 }, ...]
+#   mouse-speed     cpi, refresh_ms, decimals, units, multiplier, font_size, gradient
+#   mouse-flick     interval_ms, threshold, display_ms, fade_ms, text, font_size,
+#                   color = [r, g, b], glow_color = [r, g, b], glow_blur
+#   gamepad         style = "xbox" | "dualsense", source = "auto" | "xinput" | "dualsense",
+#                   index (XInput 0..3), width (px, default 1000),
+#                   stick_highlight = true | false, stick_color = [r, g, b] (tint while pushed)
+
+# This one: movement ring on top, keyboard : mouse below (bottoms aligned).
+anchor = "bottom-left"
+offset = [20, 20]
+opacity = 0.6
+scale = 0.8
+monitor = 0
+gap = 8
+
+[layout]
+column = [
+  { widget = "mouse-movement", radius = 150, elements = 24, element_size = [36, 18] },
+  { row = [
+      { widget = "keyboard", preset = "default" },
+      { widget = "mouse" },
+  ], align = "end" },
+]

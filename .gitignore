@@ -1,0 +1,11 @@
+/target
+# Created at runtime (shipped examples live in assets/profiles/)
+/profiles/
+/settings.toml
+/state.toml
+/logs/
+/dist/
+# Local notes and plans, never published
+/.local/
+# Generated for release zips
+/THIRD_PARTY_LICENSES.txt

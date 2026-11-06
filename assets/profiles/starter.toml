@@ -1,0 +1,11 @@
+# New profile from the app window: keyboard and mouse, bottoms aligned, bottom-left.
+anchor = "bottom-left"
+offset = [20, 20]
+opacity = 0.6
+
+[layout]
+row = [
+  { widget = "keyboard" },
+  { widget = "mouse" },
+]
+align = "end"

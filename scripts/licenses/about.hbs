@@ -1,0 +1,15 @@
+Third-party licenses
+
+Overlay Input is built with these open-source crates.
+{{#each licenses}}
+
+================================================================================
+{{{name}}}
+
+Used by:
+{{#each used_by}}
+- {{crate.name}} {{crate.version}}
+{{/each}}
+
+{{{text}}}
+{{/each}}

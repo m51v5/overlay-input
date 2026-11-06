@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    env:
+      ZIP: overlay-input-${{ github.ref_name }}-windows-x64.zip
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-about
+      - name: Check the tag matches the version
+        run: |
+          $version = (cargo metadata --no-deps --format-version 1 | ConvertFrom-Json).packages[0].version
+          if ("v$version" -ne $env:GITHUB_REF_NAME) {
+            throw "Tag $env:GITHUB_REF_NAME doesn't match version $version in Cargo.toml"
+          }
+      - name: Build
+        run: cargo build --release --locked
+      - name: Third-party licenses
+        run: cargo about generate --config scripts/licenses/about.toml --locked -o THIRD_PARTY_LICENSES.txt scripts/licenses/about.hbs
+      - name: Package
+        run: Compress-Archive -Path target/release/overlay_input.exe, LICENSE, THIRD_PARTY_LICENSES.txt -DestinationPath $env:ZIP
+      - name: Publish
+        run: gh release create $env:GITHUB_REF_NAME $env:ZIP --title "Overlay Input $env:GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
