@@ -31,17 +31,61 @@ cargo run -- --window     # same, and open the app window
 ## Build a release
 
 ```
-.\scriptsuild-release.ps1
+.\scripts\build-release.ps1
 ```
 
-This stops a running copy, builds the release exe, and copies it to `dist\OverlayInput\` (`-Out <folder>` to put it elsewhere). If PowerShell blocks scripts, run `powershell -ExecutionPolicy Bypass -File .\scriptsuild-release.ps1`.
+This stops a running copy, builds the release exe, and copies it to `dist\OverlayInput\` (`-Out <folder>` to put it elsewhere). If PowerShell blocks scripts, run `powershell -ExecutionPolicy Bypass -File .\scripts\build-release.ps1`.
 
 ## Publish a release
 
-1. Set the version in `Cargo.toml` and run `cargo build` so `Cargo.lock` follows.
-2. Commit, then push a tag such as `v0.1.0` that matches the version.
+Pushing a commit to `main` only runs CI. Pushing a tag publishes a release. A tag adds a name to a commit and changes no code, so CI doesn't run again for it, and the release workflow doesn't run the tests. Wait for CI before tagging.
 
-`.github/workflows/release.yml` then builds the exe, zips it with `LICENSE` and `THIRD_PARTY_LICENSES.txt`, and publishes a GitHub Release. It stops if the tag and the version differ.
+Replace `0.2.0` with the new version.
+
+1. Start from an up-to-date `main`, with nothing uncommitted:
+   ```
+   git checkout main
+   git pull
+   git status
+   ```
+2. Set `version = "0.2.0"` in `Cargo.toml`, then update `Cargo.lock`:
+   ```
+   cargo build
+   ```
+3. Commit and push:
+   ```
+   git add Cargo.toml Cargo.lock
+   git commit -m "chore: release v0.2.0"
+   git push
+   ```
+4. Wait for CI to pass, in the Actions tab or with:
+   ```
+   gh run list --workflow ci.yml --limit 1
+   ```
+5. Tag that same commit and push the tag. Don't commit anything in between:
+   ```
+   git tag v0.2.0
+   git push origin v0.2.0
+   ```
+6. Wait for the Release workflow. It builds the exe, zips it with `LICENSE` and `THIRD_PARTY_LICENSES.txt` as `overlay-input-v0.2.0-windows-x64.zip`, and publishes a GitHub Release.
+7. Write the notes. Generated notes only list merged pull requests, so they're nearly empty for commits pushed straight to `main`. Click **Edit** on the release, or run:
+   ```
+   gh release edit v0.2.0 --notes-file notes.md
+   ```
+8. Download the zip, unzip it into an empty folder, and run it.
+
+**If the Release workflow fails,** nothing is published. It stops when:
+
+- the tagged commit isn't on `main`
+- the tag and the version in `Cargo.toml` differ
+- a dependency's license isn't listed in `about.toml`
+
+Remove the tag, push your fix to `main`, wait for CI, then repeat step 5:
+
+```
+git tag -d v0.2.0
+git push origin --delete v0.2.0
+```
 
 **Third-party licenses:** `cargo-about` generates that file from `scripts/licenses/`. A new dependency under a license that isn't listed in `about.toml` stops the release until you've reviewed it and added it. To check before tagging:
 
