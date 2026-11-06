@@ -1,10 +1,20 @@
+<div align="center">
+
 # Overlay Input
 
-Show your keyboard, mouse and gamepad input on top of any app or game.
+**Show your keyboard, mouse and gamepad input on top of any app or game.**
 
-[![CI](https://github.com/m51v5/overlay-input/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/m51v5/overlay-input/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/m51v5/overlay-input?label=release)](https://github.com/m51v5/overlay-input/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/m51v5/overlay-input/total)](https://github.com/m51v5/overlay-input/releases)
 [![Platform: Windows 10/11](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078d4.svg)](#download)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![CI](https://github.com/m51v5/overlay-input/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/m51v5/overlay-input/actions/workflows/ci.yml)
+
+© 2026–present · [@m51v5](https://github.com/m51v5) · [m51v5.com](https://m51v5.com)
+
+</div>
+
+---
 
 ![The overlay with a few keys and a mouse button held](docs/images/overlay.png)
 
@@ -23,13 +33,23 @@ Overlay Input is a transparent, click-through overlay for Windows. It's a single
 |---|---|
 | ![Home page: where the overlay shows, and its profile](docs/images/home.png) | ![Profiles page: placement, layout and live previews](docs/images/profiles.png) |
 
+---
+
 ## Download
 
-1. Get the latest zip from [Releases](https://github.com/m51v5/overlay-input/releases/latest).
-2. Unzip it into its own folder. Profiles and settings are created next to the exe.
-3. Run `overlay_input.exe`.
+Grab the latest zip from the [Releases](https://github.com/m51v5/overlay-input/releases/latest) page.
 
-Windows 10 or 11 is required. The exe isn't code-signed, so Windows SmartScreen may warn you the first time: choose **More info**, then **Run anyway**.
+| File | Contents |
+|---|---|
+| `overlay-input-<version>-windows-x64.zip` | `overlay_input.exe`, `LICENSE`, `THIRD_PARTY_LICENSES.txt` |
+
+Unzip it into its own folder and run `overlay_input.exe`.
+
+- Windows 10 or 11, 64-bit
+- No installer and no admin rights, except for games that run as administrator
+- The exe isn't code-signed, so Windows SmartScreen may warn you the first time: choose **More info**, then **Run anyway**
+
+---
 
 ## Quick start
 
@@ -38,14 +58,20 @@ Windows 10 or 11 is required. The exe isn't code-signed, so Windows SmartScreen 
 3. On **Profiles**, move it, resize it, and pick its widgets. Press **Save** when you're done.
 4. Close the window. The overlay keeps running in the tray: double-click the tray icon to reopen the window, and press `Ctrl+Alt+F12` to hide or show the overlay.
 
+---
+
 ## Privacy
 
 Overlay Input only draws your input. It has no network code, sends nothing anywhere, and doesn't save what you type. Details are in [SECURITY.md](SECURITY.md).
+
+---
 
 ## Documentation
 
 - [Usage guide](docs/USAGE.md): the app window, profile files, every widget option, OBS setup, and known limits.
 - [Development guide](docs/DEVELOPMENT.md): running from source, tests, stack, and architecture.
+
+---
 
 ## Build from source
 
@@ -57,11 +83,22 @@ cd overlay-input
 cargo run --release
 ```
 
+---
+
+## Notes
+
+- Profiles, settings and logs live next to the exe (`profiles/`, `settings.toml`, `state.toml`, `logs/`). To remove every trace, turn off **Start with Windows** in Settings, then delete the folder.
+- Third-party licenses are in `THIRD_PARTY_LICENSES.txt` in the zip.
+
+---
+
 ## Contributing and support
 
 - Found a bug or have an idea? [Open an issue](https://github.com/m51v5/overlay-input/issues/new/choose).
 - Want to help? Read the [contributing guide](CONTRIBUTING.md) and the [code of conduct](https://github.com/m51v5/.github/blob/main/CODE_OF_CONDUCT.md).
 - Found a security problem? See [SECURITY.md](SECURITY.md).
+
+---
 
 ## License
 

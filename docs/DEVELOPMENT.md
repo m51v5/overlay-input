@@ -38,7 +38,7 @@ This stops a running copy, builds the release exe, and copies it to `dist\Overla
 
 ## Publish a release
 
-Pushing a commit to `main` only runs CI. Pushing a tag publishes a release. A tag adds a name to a commit and changes no code, so CI doesn't run again for it, and the release workflow doesn't run the tests. Wait for CI before tagging.
+Pushing to `main` runs CI when the commit changes what gets built: `src/`, `assets/`, `build.rs`, `Cargo.toml`, `Cargo.lock`, `.cargo/` or `ci.yml` itself. Changes to anything else, like the README or docs, run nothing. Pushing a tag publishes a release. A tag adds a name to a commit and changes no code, so CI doesn't run again for it, and the release workflow doesn't run the tests. Wait for CI before tagging.
 
 Replace `0.2.0` with the new version.
 
@@ -80,7 +80,7 @@ Replace `0.2.0` with the new version.
 - the tag and the version in `Cargo.toml` differ
 - a dependency's license isn't listed in `about.toml`
 
-Remove the tag, push your fix to `main`, wait for CI, then repeat step 5:
+Remove the tag, push your fix to `main`, wait for CI if the fix started it, then repeat step 5:
 
 ```
 git tag -d v0.2.0
