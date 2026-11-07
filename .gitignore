@@ -5,7 +5,9 @@
 /state.toml
 /logs/
 /dist/
-# Local notes and plans, never published
-/.local/
 # Generated for release zips
 /THIRD_PARTY_LICENSES.txt
+# Folders starting with "." are local, except these
+/.*/
+!/.github/
+!/.cargo/
